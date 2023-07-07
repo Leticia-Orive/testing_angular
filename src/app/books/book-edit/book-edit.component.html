@@ -1,0 +1,108 @@
+
+<mat-card id="error-card" class="example-card" *ngIf="error">
+  <mat-card-title-group>
+    <mat-card-title>Error</mat-card-title>
+  </mat-card-title-group>
+  <mat-card-content>
+    {{error}}
+  </mat-card-content>
+  <button class="btn-back" mat-button color="primary" [routerLink]="['/books']">Volver</button>
+</mat-card>
+
+<mat-card id="success-card" class="example-card" *ngIf="success">
+  <mat-card-title-group>
+    <mat-card-title>Guardado correcto</mat-card-title>
+  </mat-card-title-group>
+  <mat-card-content>
+    El libro se ha guardado correctamente.
+  </mat-card-content>
+  <button class="btn-back" mat-button color="primary" [routerLink]="['/books']">Volver</button>
+</mat-card>
+
+<form class="example-form" (ngSubmit)="save()" [formGroup]="editForm" name="form" role="form" *ngIf="!success">
+
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Id</mat-label>
+    <input matInput placeholder="1" type="number" formControlName="id">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Title</mat-label>
+    <input matInput placeholder="El poder del ahora" type="text" formControlName="title" required>
+    <mat-error *ngIf="editForm.get('title')!.invalid && (editForm.get('title')!.dirty || editForm.get('title')!.touched)">
+
+      <span id="error-title-required" *ngIf="editForm.get('title')!.getError('required')">
+        This field is mandatory.
+      </span>
+
+      <span id="error-title-length" *ngIf="editForm.get('title')!.getError('minlength') || editForm.get('title')!.getError('maxlength')">
+        This field must be between 10 and 50.
+      </span>
+
+    </mat-error>
+  </mat-form-field>
+
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Author</mat-label>
+    <textarea matInput placeholder="Nombre de author y apellidos..." formControlName="author"></textarea>
+    <mat-error *ngIf="editForm.get('author')!.invalid && (editForm.get('author')!.dirty || editForm.get('author')!.touched)">
+
+      <span id="error-author-required" *ngIf="editForm.get('author')!.getError('required')">
+        This field is mandatory.
+      </span>
+
+      <span id="error-author-length" *ngIf="editForm.get('author')!.getError('minlength') || editForm.get('author')!.getError('maxlength')">
+        This field must be between 10 and 50.
+      </span>
+
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Year</mat-label>
+    <input matInput placeholder="1990" type="number" formControlName="year" required>
+    <mat-error *ngIf="editForm.get('year')!.invalid && (editForm.get('year')!.dirty || editForm.get('year')!.touched)">
+      <span *ngIf="editForm.get('year')!.getError('required')">
+        This field is mandatory.
+      </span>
+    </mat-error>
+  </mat-form-field>
+
+
+  <div>
+    <label>isPublished</label>
+    <mat-radio-group formControlName="isPublished">
+      <mat-radio-button value="true">Yes</mat-radio-button>
+      <mat-radio-button value="false">No</mat-radio-button>
+      <mat-error *ngIf="editForm.get('isPublished')!.invalid && (editForm.get('isPublished')!.dirty || editForm.get('isPublished')!.touched)">
+      <span *ngIf="editForm.get('isPublished')!.getError('required')">
+        This field is mandatory.
+      </span>
+      </mat-error>
+    </mat-radio-group>
+  </div>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Released date</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="released">
+    <mat-hint>DD/MM/YYYY</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="editForm.get('released')!.invalid && (editForm.get('released')!.dirty || editForm.get('released')!.touched)">
+      <span *ngIf="editForm.get('released')!.getError('required')">
+        This field is mandatory.
+      </span>
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="editForm.invalid || isSaving">
+    Guardar
+  </button>
+  <button mat-raised-button color="accent" [routerLink]="['/books']">
+    Cancelar
+  </button>
+
+
+</form>

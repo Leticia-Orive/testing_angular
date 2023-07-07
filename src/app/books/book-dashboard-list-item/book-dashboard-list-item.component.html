@@ -1,0 +1,12 @@
+
+<mat-list-item role="listitem">
+  <h2 class="book-title" matLine>{{book.title}}</h2>
+  <p matLine>
+    <span class="book-author">Author: {{book.author}}</span>
+    <span class="book-published">Published: {{book.isPublished}}</span>
+    <span class="book-year">Year: {{book.year}}</span>
+    <span class="book-released">released: {{book.released}}</span>
+  </p>
+
+  <button type="button" mat-button color="primary" (click)="view()">Ver</button>
+</mat-list-item>

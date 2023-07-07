@@ -1,0 +1,48 @@
+<button class="btn-new" mat-button color="primary" [routerLink]="['/books', 'new']">
+  Crear nuevo libro
+</button>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>Id</th>
+    <td mat-cell *matCellDef="let element">{{element.id}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef>Title</th>
+    <td mat-cell *matCellDef="let element">{{element.title}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="author">
+    <th mat-header-cell *matHeaderCellDef>Author</th>
+    <td mat-cell *matCellDef="let element">{{element.author}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="year">
+    <th mat-header-cell *matHeaderCellDef>Year</th>
+    <td mat-cell *matCellDef="let element">{{element.year}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="isPublished">
+    <th mat-header-cell *matHeaderCellDef>Is Published</th>
+    <td mat-cell *matCellDef="let element">{{element.isPublished}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="released">
+    <th mat-header-cell *matHeaderCellDef>Released</th>
+    <td mat-cell *matCellDef="let element">{{element.released | formatMediumDate}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let element">
+      <button class="btn-view" mat-button color="primary" [routerLink]="['/books', element.id, 'view']">Ver</button>
+      <button class="btn-edit" mat-button color="accent" (click)="onEdit(element)">Editar</button>
+      <button class="btn-delete" mat-button color="warn" (click)="onDelete(element)">Borrar</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+

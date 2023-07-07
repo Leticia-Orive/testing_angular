@@ -1,0 +1,26 @@
+<mat-card id="error-card" class="example-card" *ngIf="error">
+  <mat-card-title-group>
+    <mat-card-title>Error</mat-card-title>
+  </mat-card-title-group>
+  <mat-card-content>
+    {{error}}
+  </mat-card-content>
+  <button class="btn-back" mat-button color="primary" [routerLink]="['/books']">Volver</button>
+</mat-card>
+
+<mat-card id="book-card" class="example-card" *ngIf="book">
+  <mat-card-title-group>
+    <mat-card-title>{{book.title | snakecase }}</mat-card-title>
+    <mat-card-subtitle>{{book.released | formatMediumDate}}</mat-card-subtitle>
+  </mat-card-title-group>
+  <mat-card-content>
+    <p><strong>Author: </strong> {{book.author}}</p>
+    <p appCustomColor="#072ee9"><strong>Year: </strong> {{book.year}}</p>
+    <p appCustomColor><strong>Is published: </strong> {{book.isPublished}}</p>
+  </mat-card-content>
+  <button class="btn-back" mat-button color="primary" [routerLink]="['/books']">Volver</button>
+  <button class="btn-edit" mat-button color="accent" [routerLink]="['/books', book.id, 'edit']">Editar</button>
+  <button class="btn-delete" mat-button color="warn" (click)="onDelete(book)">Borrar</button>
+</mat-card>
+
+

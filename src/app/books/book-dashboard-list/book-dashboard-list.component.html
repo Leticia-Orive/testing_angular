@@ -1,0 +1,9 @@
+
+<mat-list role="list">
+
+<app-book-dashboard-list-item *ngFor="let book of books" [book]="book"
+  (selected)="viewBook(book)">
+
+</app-book-dashboard-list-item>
+
+</mat-list>
